@@ -34,6 +34,7 @@
     "method-override": "^2.3.1",
     "mkdirp": "^0.5.0",
     "morgan": "^1.5.1",
+    "nachos-shell": "git://github.com/nachos/nachos-shell",
     "socket.io": "^1.3.5"
   }
 }
