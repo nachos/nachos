@@ -30,12 +30,10 @@
     "body-parser": "^1.12.0",
     "commander": "^2.6.0",
     "express": "^4.12.2",
-    "jsop": "^0.2.1",
     "lodash": "^3.5.0",
     "method-override": "^2.3.1",
-    "mkdirp": "^0.5.0",
     "morgan": "^1.5.1",
-    "nachos-shell": "git://github.com/nachos/nachos-shell",
+    "nachos-configuration": "git://github.com/nachos/nachos-configuration",
     "native-api": "git://github.com/nachos/native-api",
     "socket.io": "^1.3.5"
   }
