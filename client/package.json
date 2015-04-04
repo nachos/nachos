@@ -1,0 +1,16 @@
+{
+  "name": "nachos",
+  "version": "0.0.0",
+  "main": "index.html",
+  "single-instance": false,
+  "window": {
+    "toolbar": true,
+    "frame": false,
+    "position": "center",
+    "fullscreen": false,
+    "resizable": false,
+    "transparent": false,
+    "show": true,
+    "show_in_taskbar": true
+  }
+}
