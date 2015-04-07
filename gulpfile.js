@@ -102,7 +102,7 @@ gulp.task('inject:js', function () {
 });
 
 gulp.task('wiredep', function () {
-  gulp.src(['client/index.html', 'client/**/*.html'])
+  gulp.src(['client/index.html'])
     .pipe(wiredep({
       ignorePath: 'client/',
       exclude: [/font-awesome.css/]
@@ -111,7 +111,7 @@ gulp.task('wiredep', function () {
 });
 
 gulp.task('nw', function (cb) {
-  var nwProcess = spawn(nw.findpath(), ['client']);
+  var nwProcess = spawn(nw.findpath(), ['client', '--disable-gpu']);
 
   nwProcess.on('error', cb);
   nwProcess.on('close', function (code) {

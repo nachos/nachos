@@ -1,12 +1,19 @@
 'use strict';
 
-angular.module('defaultApp', ['ngMaterial'])
-  .controller('Main', function ($scope) {
+angular.module('nachosApp')
+  .controller('ChooseDefault', function ($scope, $mdDialog, ext, $timeout) {
     var native = require('native-api');
 
-    $scope.apps = ['asd', 'asd2', 'asdasd3'];
+    native.fileAssociation.getAppsThatCanOpenExtension(ext, function (err, apps) {
+      $timeout(function () {
+        $scope.apps = apps;
+      });
+    });
 
-    window.result = {
-      app: 'C:\\Program Files\\WinRAR\\WinRAR.exe'
-    };
+    $scope.ext = ext;
+    $scope.always = false;
+
+    $scope.ok = function () {
+      $mdDialog.hide({ app: 'asdasd', always: $scope.always });
+    }
   });

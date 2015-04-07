@@ -1,34 +1,37 @@
 'use strict';
 
 angular.module('nachosApp')
-  .service('files', function() {
+  .service('files', function($mdDialog) {
     var configuration = require('nachos-configuration');
     var path = require('path');
     var exec = require('child_process').execFile;
-    var gui = require('nw.gui');
 
-    this.open = function (file) {
+    var openWithApp = function (file, app) {
+      exec(app, [file]);
+    };
+
+    this.open = function (file, event) {
       var ext = path.extname(file);
 
       configuration.defaults.getDefaultApp(ext, function (err, app) {
         if (app) {
-          exec(app, [file]);
+          openWithApp(file, app);
         } else {
-          var win = gui.Window.open('app/choose-default/choose-default.html', {
-            'position': 'center',
-            'always-on-top': true
-          });
-
-          win.on('close', function () {
-            if (win.window.result && win.window.result.app) {
-              if (win.window.result && win.window.result.always) {
-                configuration.defaults.setDefaultApp(ext, win.window.result.app);
-              }
-
-              exec(win.window.result.app, [file]);
+          $mdDialog.show({
+            controller: 'ChooseDefault',
+            templateUrl: 'app/choose-default/choose-default.html',
+            targetEvent: event,
+            locals: {
+              ext: ext
+            },
+            clickOutsideToClose: false
+          }).then(function (result) {
+            console.log(result);
+            if (result.always) {
+              configuration.defaults.setDefaultApp(ext, result.app.name);
             }
 
-            this.close(true);
+            openWithApp(file, result.app);
           });
         }
       });

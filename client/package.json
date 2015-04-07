@@ -6,11 +6,10 @@
   "window": {
     "toolbar": true,
     "frame": false,
-    "position": "center",
-    "fullscreen": false,
+    "kiosk": true,
     "resizable": false,
-    "transparent": false,
-    "show": true,
-    "show_in_taskbar": true
+    "transparent": true,
+    "show_in_taskbar": false,
+    "always-on-top": true
   }
 }
