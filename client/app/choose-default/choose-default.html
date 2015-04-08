@@ -1,7 +1,17 @@
-<md-dialog>
-  Here you can choose a default program for '{{ext}}':
-  <div ng-repeat="app in apps">
-    {{app.name}}
+<md-dialog class="choose-default">
+  <div class="content">
+    <span class="md-title">Complete the action with the following application:</span>
+    <div class="apps" layout="column">
+      <md-radio-group ng-model="selectedApp" class="md-primary">
+        <md-radio-button ng-repeat="app in apps"
+                         ng-value="app">
+          <span>{{ app.name }}</span>
+        </md-radio-button>
+      </md-radio-group>
+      <md-checkbox ng-model="always">Always use this application</md-checkbox>
+    </div>
   </div>
-  <md-button ng-click="ok()">OK</md-button>
+  <div class="buttons" layout="row" layout-align="end center">
+    <md-button class="md-primary" ng-click="ok()">OK</md-button>
+  </div>
 </md-dialog>

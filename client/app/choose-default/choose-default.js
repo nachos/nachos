@@ -5,6 +5,7 @@ angular.module('nachosApp')
     var native = require('native-api');
 
     native.fileAssociation.getAppsThatCanOpenExtension(ext, function (err, apps) {
+      console.log(err, apps);
       $timeout(function () {
         $scope.apps = apps;
       });
@@ -14,6 +15,12 @@ angular.module('nachosApp')
     $scope.always = false;
 
     $scope.ok = function () {
-      $mdDialog.hide({ app: 'asdasd', always: $scope.always });
-    }
+      $mdDialog.hide({ app: $scope.selectedApp, always: $scope.always });
+    };
+
+    $scope.selectItem = function (item) {
+      if ($scope.selectedItem !== item) {
+        $scope.selectedItem = item;
+      }
+    };
   });

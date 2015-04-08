@@ -4,10 +4,11 @@ angular.module('nachosApp')
   .service('files', function($mdDialog) {
     var configuration = require('nachos-configuration');
     var path = require('path');
-    var exec = require('child_process').execFile;
+    var exec = require('child_process').exec;
 
     var openWithApp = function (file, app) {
-      exec(app, [file]);
+      app.command = app.command.replace(/\%\w/g, file);
+      exec(app.command);
     };
 
     this.open = function (file, event) {
@@ -26,7 +27,6 @@ angular.module('nachosApp')
             },
             clickOutsideToClose: false
           }).then(function (result) {
-            console.log(result);
             if (result.always) {
               configuration.defaults.setDefaultApp(ext, result.app.name);
             }

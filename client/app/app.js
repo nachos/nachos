@@ -2,7 +2,5 @@
 
 angular.module('nachosApp', ['ngMaterial'])
   .run(function (files) {
-    //files.open('D:\\Projects\\nachos\\nachos\\.travis.yml');
-    //files.open('D:\\Rockstock v1.0.rar');
-    //files.open("D:\\Music\\30 Seconds To Mars\\30 Seconds To Mars\\30 Seconds To Mars - 93 Million Miles.mp3");
+    files.open("E:\\a\\_Afrojack_-_Rock_The_House_Original_Mix_.mp3");
   });

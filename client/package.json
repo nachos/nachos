@@ -6,9 +6,10 @@
   "window": {
     "toolbar": true,
     "frame": false,
-    "kiosk": true,
+    "fullscreen": true,
     "resizable": false,
     "transparent": true,
+    "show": true,
     "show_in_taskbar": false,
     "always-on-top": true
   }
