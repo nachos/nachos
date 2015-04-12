@@ -1,17 +1,8 @@
 'use strict';
 
 angular.module('nachosApp')
-  .controller('ChooseDefault', function ($scope, $mdDialog, ext, $timeout) {
-    var native = require('native-api');
-
-    native.fileAssociation.getAppsThatCanOpenExtension(ext, function (err, apps) {
-      console.log(err, apps);
-      $timeout(function () {
-        $scope.apps = apps;
-      });
-    });
-
-    $scope.ext = ext;
+  .controller('ChooseDefault', function ($scope, $mdDialog, apps) {
+    $scope.apps = apps;
     $scope.always = false;
 
     $scope.ok = function () {

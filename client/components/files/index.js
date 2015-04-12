@@ -3,6 +3,7 @@
 angular.module('nachosApp')
   .service('files', function($mdDialog) {
     var configuration = require('nachos-configuration');
+    var native = require('native-api');
     var path = require('path');
     var exec = require('child_process').exec;
 
@@ -18,20 +19,27 @@ angular.module('nachosApp')
         if (app) {
           openWithApp(file, app);
         } else {
-          $mdDialog.show({
-            controller: 'ChooseDefault',
-            templateUrl: 'app/choose-default/choose-default.html',
-            targetEvent: event,
-            locals: {
-              ext: ext
-            },
-            clickOutsideToClose: false
-          }).then(function (result) {
-            if (result.always) {
-              configuration.defaults.setDefaultApp(ext, result.app.name);
+          native.fileAssociation.getAppsThatCanOpenExtension(ext, function (err, apps) {
+            if(apps.length === 1){
+              openWithApp(file, apps[0]);
             }
+            else{
+              $mdDialog.show({
+                controller: 'ChooseDefault',
+                templateUrl: 'app/choose-default/choose-default.html',
+                targetEvent: event,
+                locals: {
+                  apps: apps
+                },
+                clickOutsideToClose: false
+              }).then(function (result) {
+                if (result.always) {
+                  configuration.defaults.setDefaultApp(ext, result.app.name);
+                }
 
-            openWithApp(file, result.app);
+                openWithApp(file, result.app);
+              });
+            }
           });
         }
       });
