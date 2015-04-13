@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nachosApp')
-  .config(function(serverProvider) {
+  .factory('socketioConfig', function() {
 
     // When the user disconnects.. perform this
     function onDisconnect(socket) {
@@ -13,7 +13,7 @@ angular.module('nachosApp')
 
     }
 
-    serverProvider.configureSocket(function (socketio) {
+    return function (socketio) {
       socketio.on('connection', function (socket) {
         socket.address = socket.handshake.address !== null ?
         socket.handshake.address.address + ':' + socket.handshake.address.port : process.env.DOMAIN;
@@ -30,5 +30,5 @@ angular.module('nachosApp')
         onConnect(socket);
         console.info('[%s] CONNECTED', socket.address);
       });
-    });
+    };
   });

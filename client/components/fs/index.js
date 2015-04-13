@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nachosApp')
-  .service('files', function($mdDialog) {
+  .service('fs', function($mdDialog) {
     var configuration = require('nachos-configuration');
     var native = require('native-api');
     var path = require('path');

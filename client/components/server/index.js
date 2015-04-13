@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nachosApp')
-  .provider('server', function() {
+  .service('server', function(expressConfig, socketioConfig, serverRoutes) {
     var express = require('express');
 
     var app = express();
@@ -11,23 +11,13 @@ angular.module('nachosApp')
       //path: '/socket.io-client'
     });
 
-    this.configureApp = function (callback) {
-      callback(app);
-    };
+    expressConfig(app);
+    serverRoutes(app);
+    socketioConfig(socketio);
 
-    this.configureSocket = function (callback) {
-      callback(socketio);
-    };
-
-    this.$get = function () {
-      var self = {};
-
-      self.start = function () {
-        server.listen(9000, 'localhost', function () {
-          console.log('Express server listening on %d', 9000);
-        });
-      };
-
-      return self;
+    this.start = function () {
+      server.listen(9000, 'localhost', function () {
+        console.log('Express server listening on %d', 9000);
+      });
     };
   });

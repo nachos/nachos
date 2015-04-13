@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('nachosApp')
-  .config(function(serverProvider) {
-
-    serverProvider.configureApp(function(app) {
+  .factory('serverRoutes', function(fsRouter) {
+    return function(app) {
 
       // Insert routes below
-    });
+      app.use('/api/fs', fsRouter());
+    };
   });
