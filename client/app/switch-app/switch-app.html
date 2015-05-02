@@ -1,6 +1,6 @@
 <md-dialog class="choose-default">
   <div class="content" layout="row" layout-wrap>
-    <div ng-repeat="window in windows" flex="20">
+    <div ng-repeat="window in windows" flex="20" ng-class="{ selected: $index === selectedIndex }">
       <span>{{ window.process.name }}</span>
     </div>
   </div>
