@@ -1,17 +1,31 @@
-.choose-default {
-  padding-bottom: 8px;
+.switch-app {
+  padding: 8px;
 
-  .content {
-    padding: 24px 24px 8px 24px;
+  .app {
+    padding: 4px;
 
-  }
+    &[flex="16.6"]{
+      max-width: 16.666666667%;
+      flex: 0 0 16.666666667%;
+    }
 
-  .buttons {
-    padding: 0 16px;
-  }
+    .content{
+      border-radius: 3px;
+      height: 100px;
+      background-color: #0277BD;
+      transition: all 0.3s ease;
+      overflow: hidden;
 
-  .selected {
-    color: red;
-    background-color: blue;
+      &.selected {
+        background-color: #C62828;
+      }
+
+      .info {
+        padding: 8px;
+        background-color: rgba(0,0,0,.5);
+        color: white;
+        text-align: center;
+      }
+    }
   }
 }

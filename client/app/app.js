@@ -1,18 +1,35 @@
 'use strict';
 
 angular.module('nachosApp', ['ngMaterial'])
-  .run(function (fs, server, $mdDialog, switchApp) {
+  .run(function (fs, server, $mdDialog, switchApp, $timeout) {
     var gui = require('nw.gui');
     var keybindings = require('keybindings');
     var window = gui.Window.get();
+
+    // Override the default alt tab behaviour
+    // Create a shortcut with |option|.
+    var shortcut = new gui.Shortcut({
+      key : "Alt+Tab",
+      active : function() {
+      }
+    });
+    gui.App.registerGlobalHotKey(shortcut);
+
+    shortcut = new gui.Shortcut({
+      key : "Alt+Shift+Tab",
+      active : function() {
+      }
+    });
+    gui.App.registerGlobalHotKey(shortcut);
 
     new keybindings({
       key: 'f12',
       keydown: function () {
         window.showDevTools();
+        window.focus();
       }
     });
-    
+
     var isTabDialogOpen = false;
 
     function openDialog(){
@@ -30,31 +47,41 @@ angular.module('nachosApp', ['ngMaterial'])
       isTabDialogOpen = false;
       $mdDialog.hide();
     }
-    new keybindings({
-      key: 'ctrl+tab',
-      keydown: function () {
+
+    var ctrlTab = function (reverse) {
+      $timeout(function () {
         if (!isTabDialogOpen) {
           openDialog();
+
+          var ctrl = new keybindings({
+            key: 'alt',
+            keyup: function () {
+              closeDialog();
+              ctrl();
+              switchApp.reset();
+            }
+          });
         }
 
-        switchApp.next();
-      },
-      keyup: function () {
-        closeDialog();
+        if (!reverse) {
+          switchApp.next();
+        } else {
+          switchApp.previous();
+        }
+      });
+    };
+
+    new keybindings({
+      key: 'alt+tab',
+      keydown: function () {
+        ctrlTab(false);
       }
     });
 
     new keybindings({
-      key: 'ctrl+shift+tab',
+      key: 'alt+shift+tab',
       keydown: function () {
-        if (!isTabDialogOpen) {
-          openDialog();
-        }
-
-        switchApp.previous();
-      },
-      keyup: function () {
-        closeDialog();
+        ctrlTab(true);
       }
     });
 

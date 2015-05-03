@@ -13,4 +13,8 @@ angular.module('nachosApp')
       this.index--;
       $rootScope.$broadcast('switchAppIndexUpdated',this.index);
     };
+
+    this.reset = function () {
+      this.index = 0;
+    }
   });
