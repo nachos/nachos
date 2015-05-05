@@ -1,9 +1,10 @@
-<md-dialog class="switch-app" flex="60">
+<md-dialog class="switch-app" flex="60" layout="column" layout-align="center center">
+  <span>{{ apps[selectedIndex].title }}</span>
   <div class="content" layout="row" layout-wrap layout-align="start center">
     <div ng-repeat="app in apps" flex="16.6" class="app">
       <div class="content" ng-class="{ selected: $index === selectedIndex }" layout="column" layout-align="end">
         <div layout="row" layout-align="center center">
-          <span class="info" flex>{{ app.process.name }}</span>
+          <span class="info" flex>Registry title</span>
         </div>
       </div>
     </div>
