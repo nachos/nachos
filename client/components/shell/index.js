@@ -8,7 +8,7 @@ angular.module('nachosApp')
     var screen = require('native-api').screen;
     var _ = require('lodash');
 
-    configuration.configs.get(function (err, file) {
+    configuration.configs.get('nachos', function (err, file) {
       if (err) return console.log(err);
 
       var pathToShell = path.resolve('./../node_modules/nachos-shell/client');
