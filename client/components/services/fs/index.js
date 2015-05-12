@@ -26,7 +26,7 @@ angular.module('nachosApp')
             else{
               $mdDialog.show({
                 controller: 'ChooseDefault',
-                templateUrl: 'app/choose-default/choose-default.html',
+                templateUrl: 'app/explorer/choose-default/choose-default.html',
                 targetEvent: event,
                 locals: {
                   apps: apps

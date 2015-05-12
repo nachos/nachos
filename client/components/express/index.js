@@ -20,4 +20,8 @@ angular.module('nachosApp')
         console.log('Express server listening on %d', 9000);
       });
     };
+
+    this.stop = function () {
+      server.stop();
+    }
   });

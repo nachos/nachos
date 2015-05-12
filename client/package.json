@@ -4,13 +4,13 @@
   "main": "index.html",
   "single-instance": false,
   "window": {
-    "toolbar": false,
+    "toolbar": true,
     "frame": false,
     "fullscreen": true,
     "resizable": false,
     "transparent": true,
     "show": true,
     "show_in_taskbar": false,
-    "always-on-top": true
+    "always-on-top": false
   }
 }

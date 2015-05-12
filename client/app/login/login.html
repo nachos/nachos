@@ -1,0 +1,23 @@
+<md-content class="login" layout="row" flex layout-align="center center" md-theme="login">
+  <form flex="50" layout="row" ng-submit="login()">
+    <div class="user-image" layout="column" flex="20" layout-align="center center">
+      <div>img</div>
+    </div>
+    <div flex layout="column">
+        <md-input-container>
+        <label>Email</label>
+        <input ng-model="user.email">
+      </md-input-container>
+      <md-input-container>
+        <label>Password</label>
+        <input type="password" ng-model="user.password">
+      </md-input-container>
+    </div>
+    <div layout="column" layout-align="center center" flex="15">
+      <md-button class="md-primary" ng-click="login()">
+        <i class="mdi mdi-arrow-right"></i>
+      </md-button>
+    </div>
+  </form>
+  <label style="color: white">{{error}}</label>
+</md-content>

@@ -5,6 +5,8 @@
   <title></title>
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="bower_components/mdi/css/materialdesignicons.css" />
+  <link rel="stylesheet" href="bower_components/mdi/css/materialdesignicons.min.css" />
   <!-- endbower -->
   <link rel="stylesheet" href=".tmp/app/app.css">
   <!-- injector:css -->
@@ -16,23 +18,34 @@
   </style>
 </head>
 <body>
+  <div ui-view layout-fill layout="column"></div>
   <!-- bower:js -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-aria/angular-aria.js"></script>
   <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <!-- endbower -->
   <script src="app/app.js"></script>
   <!-- injector:js -->
-  <script src="app/choose-default/choose-default.js"></script>
-  <script src="components/fs/index.js"></script>
-  <script src="components/server/index.js"></script>
-  <script src="components/server/routes.js"></script>
-  <script src="components/shell/index.js"></script>
-  <script src="components/server/config/express.js"></script>
-  <script src="components/server/config/socketio.js"></script>
-  <script src="components/server/api/fs/index.js"></script>
-  <script src="components/server/api/user/index.js"></script>
+  <script src="app/explorer/explorer.controller.js"></script>
+  <script src="app/explorer/explorer.js"></script>
+  <script src="app/login/login.controller.js"></script>
+  <script src="app/login/login.js"></script>
+  <script src="components/auth/auth.interceptor.js"></script>
+  <script src="components/auth/auth.service.js"></script>
+  <script src="components/auth/user.service.js"></script>
+  <script src="components/express/index.js"></script>
+  <script src="components/express/routes.js"></script>
+  <script src="app/explorer/choose-default/choose-default.js"></script>
+  <script src="components/express/config/express.js"></script>
+  <script src="components/express/config/socketio.js"></script>
+  <script src="components/services/fs/index.js"></script>
+  <script src="components/services/shell/index.js"></script>
+  <script src="components/express/api/fs/index.js"></script>
+  <script src="components/express/api/user/index.js"></script>
   <!-- endinjector -->
 </body>
 </html>
