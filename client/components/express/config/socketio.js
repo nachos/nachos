@@ -29,6 +29,10 @@ angular.module('nachosApp')
         // Call onConnect.
         onConnect(socket);
         console.info('[%s] CONNECTED', socket.address);
+
+        socket.on('config-changed', function (app) {
+          socketio.emit('config-changed:' + app);
+        });
       });
     };
   });
