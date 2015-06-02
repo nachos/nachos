@@ -11,5 +11,10 @@ angular.module('nachosApp')
           $state.go('explorer');
         }
       });
+    };
+
+    $scope.user = {
+      email: 'nacho@gmail.com',
+      password: 'nacho'
     }
   });
