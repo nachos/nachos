@@ -9,7 +9,7 @@ angular.module('nachosApp')
     var _ = require('lodash');
 
     this.start = function () {
-      configuration.configs.get('nachos', function (err, file) {
+      configuration.configs.getGlobal('nachos', function (err, file) {
         if (err) return console.log(err);
 
         var pathToShell = path.resolve('./../node_modules/nachos-shell/client');

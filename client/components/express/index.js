@@ -29,11 +29,11 @@ angular.module('nachosApp')
       var port = _.random(1024, 65535);
       server.listen(port, 'localhost', function () {
         console.log('Express server listening on %d', port);
-        configuration.configs.get('nachos', function(err, config){
+        configuration.configs.getGlobal('nachos', function(err, config){
           if(err)
             console.log(err);
           config.port = port;
-          configuration.configs.save('nachos', config, function(err){
+          configuration.configs.saveGlobal('nachos', config, function(err){
             if(err)
               console.log(err);
           })
