@@ -2,14 +2,14 @@
 
 angular.module('nachosApp')
   .service('shell', function () {
-    var SettingsFile = require('nachos-settings-file');
+    var nachosConfig = require('nachos-config')();
     var exec = require('child_process').exec;
     var path = require('path');
     var screen = require('native-api').screen;
     var _ = require('lodash');
 
     this.start = function () {
-      new SettingsFile('nachos').get(function (err, file) {
+      nachosConfig.get(function (err, file) {
         if (err) return console.log(err);
 
         var pathToShell = path.resolve('./../node_modules/nachos-shell/client');

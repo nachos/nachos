@@ -11,7 +11,7 @@ angular.module('nachosApp')
       //serveClient: (config.env === 'production') ? false : true,
       //path: '/socket.io-client'
     });
-    var SettingsFile = require('nachos-settings-file');
+    var nachosConfig = require('nachos-config')();
 
     expressConfig(app);
     serverRoutes(app);
@@ -27,16 +27,19 @@ angular.module('nachosApp')
 
     this.start = function () {
       var port = _.random(1024, 65535);
+
       server.listen(port, 'localhost', function () {
         console.log('Express server listening on %d', port);
-        var nachosSettings = new SettingsFile('nachos');
-        nachosSettings.get(function(err, config){
-          if(err)
+        nachosConfig.get(function(err, config){
+          if(err) {
             console.log(err);
+          }
+
           config.port = port;
-          nachosSettings.save(config, function(err){
-            if(err)
+          nachosConfig.save(config, function(err){
+            if(err) {
               console.log(err);
+            }
           })
         })
       });

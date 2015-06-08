@@ -2,25 +2,24 @@
 
 angular.module('nachosApp')
   .service('fs', function ($mdDialog) {
-    var SettingsFile = require('nachos-settings-file');
+    var nachosConfig = require('nachos-config')();
     var native = require('native-api');
     var path = require('path');
     var exec = require('child_process').exec;
-    var nachosSettings = new SettingsFile('nachos');
 
     var setDefaultApp = function (ext, app, callback) {
-      nachosSettings.get(function (err, config) {
+      nachosConfig.get(function (err, config) {
         if (err) {
           return callback(err);
         }
 
         config.defaults.exts[ext] = app;
-        nachosSettings.save(config, callback);
+        nachosConfig.save(config, callback);
       });
     };
 
     var getDefaultApp = function (ext, callback) {
-      nachosSettings.get(function (err, config) {
+      nachosConfig.get(function (err, config) {
         if (err) {
           return callback(err);
         }
