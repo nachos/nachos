@@ -12,7 +12,7 @@ angular.module('nachosApp')
       nachosConfig.get(function (err, file) {
         if (err) return console.log(err);
 
-        var pathToShell = path.resolve('./../node_modules/nachos-shell/client');
+        var pathToShell = path.resolve('./../node_modules/shell-taco/client');
         var commandToRun = file.shell || 'nw ' + pathToShell;
         console.log('Starting shell: ' + commandToRun);
 
