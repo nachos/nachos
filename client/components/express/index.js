@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nachosApp')
-  .service('server', function(expressConfig, socketioConfig, serverRoutes) {
+  .service('server', function (expressConfig, socketioConfig, serverRoutes) {
     var self = this;
     var express = require('express');
     var _ = require('lodash');
@@ -30,18 +30,11 @@ angular.module('nachosApp')
 
       server.listen(port, 'localhost', function () {
         console.log('Express server listening on %d', port);
-        nachosConfig.get(function(err, config){
-          if(err) {
+        nachosConfig.set({port: port}, function (err) {
+          if (err) {
             console.log(err);
           }
-
-          config.port = port;
-          nachosConfig.save(config, function(err){
-            if(err) {
-              console.log(err);
-            }
-          })
-        })
+        });
       });
     };
 
