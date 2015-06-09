@@ -2,7 +2,9 @@
 
 angular.module('nachosApp')
   .factory('User', function ($resource) {
-    return $resource('http://localhost:1337/api/users/:id/:controller', {
+    var nachosConfig = require('nachos-config')();
+    var BASE_URL = nachosConfig.getSync().server;
+    return $resource(BASE_URL + '/api/users/:id/:controller', {
         id: '@_id'
       },
       {

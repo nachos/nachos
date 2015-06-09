@@ -23,8 +23,11 @@ angular.module('nachosApp')
         if (err) {
           return callback(err);
         }
+        if (config.defaults && config.defaults.exts){
+          return callback(null, config.defaults.exts[ext]);
+        }
 
-        return callback(null, config.defaults.exts[ext]);
+        callback();
       });
     };
 

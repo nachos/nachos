@@ -3,11 +3,12 @@
 angular.module('nachosApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookies, $q) {
     var currentUser = {};
+    var nachosConfig = require('nachos-config')();
     if ($cookies.token) {
       currentUser = User.get();
     }
 
-    var BASE_URL = 'http://localhost:1337';
+    var BASE_URL = nachosConfig.getSync().server;
 
     return {
 
