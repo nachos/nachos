@@ -30,13 +30,17 @@ angular.module('nachosApp')
         onConnect(socket);
         console.info('[%s] CONNECTED', socket.address);
 
-        socket.on('config.global-changed', function (data) {
-          socketio.emit('config.global-changed:' + data.app, data.config);
+        socket.on('settings.global-changed', function (data) {
+          socketio.emit('settings.global-changed:' + data.app, data.config);
         });
 
-        socket.on('config.instance-changed', function (data) {
-          socketio.emit('config.instance-changed:' + data.instance, data.config);
+        socket.on('settings.instance-changed', function (data) {
+          socketio.emit('settings.instance-changed:' + data.instance, data.config);
         });
+
+        socket.on('custom', function (data) {
+          socketio.emit('custom.' + data.name, data.data);
+        })
       });
     };
   });
