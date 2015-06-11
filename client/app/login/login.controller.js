@@ -4,7 +4,7 @@ angular.module('nachosApp')
   .controller('Login', function ($scope, $state, Auth) {
 
     $scope.login = function () {
-      Auth.login($scope.user, function (err, response) {
+      Auth.login($scope.user, function (err) {
         if (err) {
           $scope.error = err;
         } else {
@@ -16,5 +16,5 @@ angular.module('nachosApp')
     $scope.user = {
       email: 'nacho@gmail.com',
       password: 'nacho'
-    }
+    };
   });
