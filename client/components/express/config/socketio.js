@@ -25,15 +25,15 @@ angular.module('nachosApp')
         console.info('[%s] CONNECTED', socket.address);
 
         socket.on('settings.global-changed', function (data) {
-          socketio.emit('settings.global-changed:' + data.app, data.config);
+          socket.broadcast.emit('settings.global-changed:' + data.app, data.config);
         });
 
         socket.on('settings.instance-changed', function (data) {
-          socketio.emit('settings.instance-changed:' + data.instance, data.config);
+          socket.broadcast.emit('settings.instance-changed:' + data.instance, data.config);
         });
 
         socket.on('custom', function (data) {
-          socketio.emit('custom.' + data.name, data.data);
+          socket.broadcast.emit('custom.' + data.name, data.data);
         });
       });
     };
