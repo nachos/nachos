@@ -13,37 +13,13 @@ angular.module('nachosApp', ['ngMaterial', 'ui.router', 'ngResource', 'ngCookies
       .dark()
       .primaryColor('amber');
   })
-  .run(function (Auth, $rootScope, $state) {
+  .run(function ($state) {
+    var serverApi = require('nachos-server-api');
+    var client = serverApi();
 
-    $rootScope.$on('$stateChangeStart', function (event, next) {
-      next.data = next.data || {};
-
-      if(!next.data.loginNotRequired) {
-        Auth.isLoggedInAsync(function (loggedIn) {
-          if (loggedIn) {
-            event.preventDefault();
-            $state.go('explorer');
-          } else {
-            event.preventDefault();
-            $state.go('login');
-          }
-        });
-      }
-      else if(next.data.loggedInForbidden) {
-        Auth.isLoggedInAsync(function (loggedIn) {
-          if (loggedIn) {
-            event.preventDefault();
-            $state.go('explorer');
-          }
-        });
-      }
-    });
-
-    Auth.isLoggedInAsync(function (loggedIn) {
-      if (loggedIn) {
-        $state.go('explorer');
-      } else {
-        $state.go('login');
-      }
-    });
+    if (client.connected()) {
+      $state.go('explorer');
+    } else {
+      $state.go('login');
+    }
   });

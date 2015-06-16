@@ -3,15 +3,9 @@
 angular.module('nachosApp')
   .factory('socketioConfig', function() {
 
-    // When the user disconnects.. perform this
-    function onDisconnect(socket) {
+    function onConnect(socket) { }
 
-    }
-
-    // When the user connects.. perform this
-    function onConnect(socket) {
-
-    }
+    function onDisconnect(socket) { }
 
     return function (socketio) {
       socketio.on('connection', function (socket) {
@@ -40,7 +34,7 @@ angular.module('nachosApp')
 
         socket.on('custom', function (data) {
           socketio.emit('custom.' + data.name, data.data);
-        })
+        });
       });
     };
   });

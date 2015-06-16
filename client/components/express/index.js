@@ -7,10 +7,7 @@ angular.module('nachosApp')
     var _ = require('lodash');
     var app = express();
     var server = require('http').createServer(app);
-    var socketio = require('socket.io')(server, {
-      //serveClient: (config.env === 'production') ? false : true,
-      //path: '/socket.io-client'
-    });
+    var socketio = require('socket.io')(server, {});
     var nachosConfig = require('nachos-config')();
 
     expressConfig(app);

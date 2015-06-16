@@ -6,10 +6,6 @@ angular.module('nachosApp')
       .state('login', {
         url: '/login',
         controller: 'Login',
-        templateUrl: 'app/login/login.html',
-        data: {
-          loginNotRequired: true,
-          loggedInForbidden: true
-        }
+        templateUrl: 'app/login/login.html'
       });
   });
