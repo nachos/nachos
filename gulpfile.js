@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 var childProcess = require('child_process');
 var spawn = childProcess.spawn;
-var nw = require('nw');
+var electron = require('electron-prebuilt')
 var wiredep = require('wiredep').stream;
 var runSequence = require('run-sequence');
 var stylish = require('jshint-stylish');
@@ -110,11 +110,11 @@ gulp.task('wiredep', function () {
     .pipe(gulp.dest('client'));
 });
 
-gulp.task('nw', function (cb) {
-  var nwProcess = spawn(nw.findpath(), ['client', '--disable-gpu']);
+gulp.task('electron', function (cb) {
+  //var electronProc = spawn('electron .');
 
-  nwProcess.on('error', cb);
-  nwProcess.on('close', function (code) {
+  electronProc.on('error', cb);
+  electronProc.on('close', function (code) {
     if (code) {
       cb(new Error('child process exited with code ' + code))
     }
@@ -139,6 +139,6 @@ gulp.task('build', function (cb) {
 gulp.task('serve', function (cb) {
   runSequence(
     'build',
-    ['nw'],
+    ['electron'],
     cb);
 });
