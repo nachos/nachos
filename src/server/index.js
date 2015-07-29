@@ -16,9 +16,10 @@ var start = function () {
 
   server.listen(port, 'localhost', function () {
     console.log('Express server listening on %d', port);
-    nachosConfig.set({port: port}).catch(function (err) {
-      console.log(err);
-    });
+    nachosConfig.set({port: port})
+      .catch(function (err) {
+        console.log(err);
+      });
   });
 };
 

@@ -111,7 +111,7 @@ gulp.task('wiredep', function () {
 });
 
 gulp.task('electron', function (cb) {
-  //var electronProc = spawn('electron .');
+  var electronProc = spawn('electron .');
 
   electronProc.on('error', cb);
   electronProc.on('close', function (code) {

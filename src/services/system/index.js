@@ -2,6 +2,8 @@
 
 var fs = require('../fs');
 
-module.exports.open = function (path, event) {
-  return fs.openFile(path, event);
+module.exports = {
+  open: function (path, event) {
+    return fs.openFile(path, event);
+  }
 };
