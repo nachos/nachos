@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('nachosApp')
-  .controller('Explorer', function ($scope, fs, server, shell) {
-    var gui = require('nw.gui');
-    var keybindings = require('keybindings');
+  .controller('Explorer', function ($scope) {
+    /*var gui = require('nw.gui');
     var window = gui.Window.get();
 
     var f12 = new keybindings({
@@ -14,7 +13,7 @@ angular.module('nachosApp')
     });
 
     server.start();
-    shell.start();
+    shell.start();*/
 
     /*$scope.on('$destroy', function () {
       server.stop();

@@ -2,7 +2,7 @@
   "name": "nachos",
   "version": "0.0.0",
   "description": "Node launcher open source",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "gulp test"
   },
@@ -27,9 +27,9 @@
     "gulp-inject": "^1.2.0",
     "gulp-jshint": "^1.9.2",
     "gulp-less": "^3.0.2",
-    "jshint-stylish": "^1.0.1",
+    "jshint-stylish": "^2.0.1",
     "run-sequence": "^1.0.2",
-    "wiredep": "^2.2.2"
+    "wiredep": "^3.0.0-beta"
   },
   "dependencies": {
     "body-parser": "^1.12.0",
