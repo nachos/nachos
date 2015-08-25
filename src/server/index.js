@@ -28,7 +28,7 @@ var stop = function () {
 };
 
 server.on('error', function (e) {
-  if (e.code == 'EADDRINUSE') {
+  if (e.code === 'EADDRINUSE') {
     console.log('Address in use, retrying...');
     stop();
     start();

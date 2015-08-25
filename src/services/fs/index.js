@@ -1,8 +1,8 @@
 'use strict';
 
-//var native = require('native-api');
 var path = require('path');
 var exec = require('child_process').exec;
+var defaults = require('../../services/defaults');
 
 var openWithApp = function (file, app) {
   app.command = app.command.replace(/\%\w/g, file);
@@ -16,10 +16,12 @@ module.exports.openFile = function (file) {
     .then(function (app) {
       if (app) {
         openWithApp(file, app);
-      } else {
+      }
+      else {
         console.log('choose an app');
 
-        /*native.fileAssociation.getAppsThatCanOpenExtension(ext, function (err, apps) {
+        /* A
+        native.fileAssociation.getAppsThatCanOpenExtension(ext, function (err, apps) {
          $mdDialog.show({
          controller: 'ChooseDefault',
          templateUrl: 'app/explorer/choose-default/choose-default.html',
@@ -40,6 +42,4 @@ module.exports.openFile = function (file) {
     });
 };
 
-module.exports.openFolder = function (folder, event) {
-
-};
+module.exports.openFolder = function () {};

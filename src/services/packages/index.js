@@ -16,6 +16,7 @@ var open = function (name, args) {
 
       if (pkg.type === 'burrito') {
         args.unshift(name);
+
         return open('burrito', args);
       }
 

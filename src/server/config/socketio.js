@@ -1,9 +1,9 @@
 'use strict';
 
-function onConnect(socket) {
+function onConnect() {
 }
 
-function onDisconnect(socket) {
+function onDisconnect() {
 }
 
 module.exports = function (socketio) {

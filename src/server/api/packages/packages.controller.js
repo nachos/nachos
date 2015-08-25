@@ -5,7 +5,7 @@ var packages = require('nachos-packages');
 var Q = require('q');
 var path = require('path');
 
-var controller = module.exports = {};
+var controller = {};
 
 var _open = function (name, args) {
   args = args || [];
@@ -18,6 +18,7 @@ var _open = function (name, args) {
 
       if (pkg.type === 'burrito') {
         args.unshift(name);
+
         return _open('burrito', args);
       }
 
@@ -37,3 +38,5 @@ controller.open = function (req, res) {
       res.status(400).json({message: err});
     });
 };
+
+module.exports = controller;

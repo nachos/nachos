@@ -5,6 +5,7 @@ var packages = require('../../../services').packages;
 
 module.exports = function () {
   var router = express.Router();
+
   console.log('asdfasfasf');
   router.post('/open', function (req, res) {
     console.log('asdf');
@@ -15,12 +16,11 @@ module.exports = function () {
   return router;
 };
 
-
-
+/* A
 'use strict';
 
 var express = require('express');
-var controller = require('./package.controller');
+var controller = require('./packages.controller');
 var auth = require('../../auth/auth.service');
 
 var router = express.Router();
@@ -31,4 +31,4 @@ router.post('/', auth.hasPermissions('write_packages'), controller.create);
 router.put('/:name', auth.hasPermissions('write_packages'), controller.update);
 router.delete('/:name', auth.hasPermissions('write_packages'), controller.destroy);
 
-module.exports = router;
+module.exports = router;*/
