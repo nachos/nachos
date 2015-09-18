@@ -3,7 +3,7 @@
 var app = require('app');
 var auth = require('./auth');
 var server = require('./server');
-var packages = require('./services/packages');
+var nachosOpen = require('nachos-open');
 
 server.start();
 
@@ -11,12 +11,12 @@ app.on('ready', function () {
   auth.isAuthenticated()
     .then(function (isAuthenticated) {
       if (isAuthenticated) {
-        return packages.open('shell');
+        return nachosOpen('shell');
       }
       else {
         auth.login()
           .then(function () {
-            return packages.open('shell');
+            return nachosOpen('shell');
           });
       }
     });

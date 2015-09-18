@@ -6,13 +6,13 @@ var config = require('../config');
 
 module.exports = function (gulp) {
   gulp.task('test', ['lint'], function (cb) {
-    gulp.src(config.paths.src)
+    gulp.src(config.paths.src.js)
       .pipe(istanbul({
         includeUntested: true
       }))
       .pipe(istanbul.hookRequire())
       .on('finish', function () {
-        gulp.src(config.paths.test)
+        gulp.src(config.paths.src.test)
           .pipe(mocha({reporter: 'spec'}))
           .pipe(istanbul.writeReports())
           .pipe(istanbul.enforceThresholds({thresholds: {global: 100}}))

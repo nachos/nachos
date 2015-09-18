@@ -6,7 +6,10 @@ angular.module('nachosApp')
     $scope.always = false;
 
     $scope.ok = function () {
-      $mdDialog.hide({ app: $scope.selectedApp, always: $scope.always });
+      $mdDialog.hide({
+        app: $scope.selectedApp,
+        always: $scope.always
+      });
     };
 
     $scope.selectItem = function (item) {

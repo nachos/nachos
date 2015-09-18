@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nachosApp')
+angular.module('loginWindow')
   .controller('Login', function ($scope) {
     var serverApi = require('nachos-server-api');
     var ipc = require('ipc');
@@ -13,15 +13,15 @@ angular.module('nachosApp')
         });
     };
 
-    $scope.loginSocial = function (social) {
-      /*client.connect($scope.user)
+    /*$scope.loginSocial = function (social) {
+      /!*client.connect($scope.user)
         .then(function (response) {
           ipc.send('login:success', response);
-        });*/
-    };
+        });*!/
+    };*/
 
     $scope.user = {
       email: 'nacho@gmail.com',
       password: 'nacho'
-    }
+    };
   });

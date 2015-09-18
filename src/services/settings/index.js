@@ -1,17 +1,9 @@
 'use strict';
 
-var spawn = require('child-process-promise').spawn;
-var path = require('path');
+var nachosOpen = require('nachos-open');
 
 module.exports = {
   open: function (name) {
-    var packages = require('nachos-packages');
-
-    var burrito = 'burrito';
-
-    packages.getTaco(burrito)
-      .then(function (taco) {
-        spawn(path.join(taco.path, burrito + '.exe'), ['settings', name], {cwd: taco.path});
-      });
+    nachosOpen('settings', [name]);
   }
 };

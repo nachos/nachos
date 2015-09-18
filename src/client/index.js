@@ -17,7 +17,7 @@ module.exports.login = function () {
     }
   });
 
-  win.loadUrl('file://' + path.resolve('./client/index.html#login'));
+  win.loadUrl('file://' + path.resolve('./client/login/index.html'));
 
   win.webContents.on('did-finish-load', function () {
     win.show();

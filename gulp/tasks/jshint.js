@@ -13,15 +13,29 @@ var jshintPipe = function (jshintrc) {
 };
 
 module.exports = function (gulp) {
-  gulp.task('jshint', ['jshint:src', 'jshint:test', 'jshint:gulp']);
+  gulp.task('jshint', ['jshint:src', 'jshint:client', 'jshint:gulp']);
 
-  gulp.task('jshint:src', function () {
-    return gulp.src(config.paths.src)
+  gulp.task('jshint:src', ['jshint:src:js', 'jshint:src:test']);
+
+  gulp.task('jshint:src:js', function () {
+    return gulp.src(config.paths.src.js)
       .pipe(jshintPipe('.jshintrc'));
   });
 
-  gulp.task('jshint:test', function () {
-    return gulp.src(config.paths.test)
+  gulp.task('jshint:src:test', function () {
+    return gulp.src(config.paths.src.test)
+      .pipe(jshintPipe('.spec.jshintrc'));
+  });
+
+  gulp.task('jshint:client', ['jshint:client:js', 'jshint:client:test']);
+
+  gulp.task('jshint:client:js', function () {
+    return gulp.src(config.paths.client.js)
+      .pipe(jshintPipe('.client.jshintrc'));
+  });
+
+  gulp.task('jshint:client:test', function () {
+    return gulp.src(config.paths.client.test)
       .pipe(jshintPipe('.spec.jshintrc'));
   });
 
