@@ -1,4 +1,4 @@
-<md-content ng-controller="Login" class="login" layout="row" flex layout-align="center center" md-theme="login">
+<md-content ng-controller="login" class="login" layout="row" flex layout-align="center center">
   <form flex="50" layout="row" ng-submit="login()">
     <div class="user-image" layout="column" flex="20" layout-align="center center">
       <div>img</div>
@@ -14,14 +14,14 @@
       </md-input-container>
       <div flex layout="row">
         <div layout="row" layout-align="center">
-          <md-button class="md-raised md-primary" md-theme="facebook" ng-click="loginSocial('facebook')" type="button"
+          <md-button class="md-raised md-primary" ng-click="loginSocial('facebook')" type="button"
                      flex="85" flex-sm="100">
             <span>Facebook</span>
             <i class="fa fa-facebook fa-lg"></i>
           </md-button>
         </div>
         <div layout="row" layout-align="center">
-          <md-button class="md-raised md-primary" md-theme="google" ng-click="loginSocial('google')" type="button"
+          <md-button class="md-raised md-primary" ng-click="loginSocial('google')" type="button"
                      flex="85" flex-sm="100">
             <span>Google</span>
             <i class="fa fa-google fa-lg"></i>

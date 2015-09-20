@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('nachosApp')
-  .controller('ChooseDefault', function ($scope, $mdDialog, apps) {
-    $scope.apps = apps;
+angular.module('chooseDefaultWindow')
+  .controller('chooseDefault', function ($scope, $mdDialog) {
+    $scope.apps = [{name: 'elad'}];
     $scope.always = false;
 
     $scope.ok = function () {

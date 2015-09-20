@@ -5,7 +5,7 @@ var BrowserWindow = require('browser-window');
 var path = require('path');
 var Q = require('q');
 
-module.exports.login = function () {
+var login = function () {
   var deferred = Q.defer();
 
   var win = new BrowserWindow({
@@ -33,4 +33,38 @@ module.exports.login = function () {
   });
 
   return deferred.promise;
+};
+
+var chooseDefault = function () {
+  var deferred = Q.defer();
+
+  var win = new BrowserWindow({
+    transparent: true,
+    frame: false,
+    'use-content-size': true,
+    'web-preferences': {
+      'web-security': false
+    }
+  });
+
+  win.loadUrl('file://' + path.resolve('./client/choose-default/index.html'));
+
+  win.webContents.on('did-finish-load', function () {
+    win.show();
+  });
+
+  win.on('closed', function () {
+    win = null;
+  });
+
+  win.on('blur', function () {
+    win.hide();
+  });
+
+  return deferred.promise;
+};
+
+module.exports = {
+  login: login,
+  chooseDefault: chooseDefault
 };

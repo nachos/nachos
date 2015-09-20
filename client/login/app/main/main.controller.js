@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('loginWindow')
-  .controller('Login', function ($scope) {
+  .controller('login', function ($scope) {
     var serverApi = require('nachos-server-api');
     var ipc = require('ipc');
     var client = serverApi();
