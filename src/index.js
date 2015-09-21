@@ -4,7 +4,6 @@ var app = require('app');
 var auth = require('./auth');
 var server = require('./server');
 var nachosOpen = require('nachos-open');
-var client = require('./client');
 
 server.start();
 
@@ -19,8 +18,7 @@ app.on('ready', function () {
         .then(function () {
           return nachosOpen('shell');
         });
-    })
-    .then(client.chooseDefault);
+    });
 });
 
 app.on('window-all-closed', function () {

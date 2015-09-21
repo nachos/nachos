@@ -1,15 +1,10 @@
 'use strict';
 
 var express = require('express');
-var system = require('../../../services').system;
+var controller = require('./system.controller');
 
-module.exports = function () {
-  var router = express.Router();
+var router = express.Router();
 
-  router.post('/open', function (req, res) {
-    system.open(req.body.path);
-    res.json({});
-  });
+router.post('/open', controller.open);
 
-  return router;
-};
+module.exports = router;

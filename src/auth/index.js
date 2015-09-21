@@ -1,18 +1,23 @@
 'use strict';
 
-var client = require('../client');
+var login = require('../client/login');
 var nachosConfig = require('nachos-config');
 
-module.exports.isAuthenticated = function () {
+var isAuthenticated = function () {
   return nachosConfig.get()
     .then(function (config) {
       return !!config.token;
     });
 };
 
-module.exports.login = function () {
-  return client.login()
+var promptLogin = function () {
+  return login()
     .then(function (token) {
       return nachosConfig.set({ token: token });
     });
+};
+
+module.exports = {
+  isAuthenticated: isAuthenticated,
+  login: promptLogin
 };
