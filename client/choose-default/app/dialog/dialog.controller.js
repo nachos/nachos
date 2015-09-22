@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('chooseDefaultWindow')
-  .controller('chooseDefault', function ($scope, $mdDialog) {
-    $scope.apps = [{name: 'elad'}];
+  .controller('chooseDefault', function ($scope, $mdDialog, apps) {
+    $scope.apps = apps;
     $scope.always = false;
 
     $scope.ok = function () {

@@ -1,9 +1,9 @@
 'use strict';
 
 var app = require('app');
+var nachosOpen = require('nachos-open');
 var auth = require('./auth');
 var server = require('./server');
-var nachosOpen = require('nachos-open');
 
 server.start();
 
@@ -19,7 +19,4 @@ app.on('ready', function () {
           return nachosOpen('shell');
         });
     });
-});
-
-app.on('window-all-closed', function () {
 });

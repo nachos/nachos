@@ -21,6 +21,7 @@ module.exports = function (ext) {
 
   win.webContents.on('did-finish-load', function () {
     win.show();
+    win.webContents.send('chooseDefault:extension', ext);
   });
 
   win.on('closed', function () {
@@ -31,10 +32,9 @@ module.exports = function (ext) {
     win.hide();
   });
 
-  ipc.send('chooseDefault:choose', ext);
-  ipc.on('chooseDefault:selected', function (event, app) {
-    deferred.resolve(app);
-    win.close();
+  ipc.on('chooseDefault:selected', function (event, options) {
+    deferred.resolve(options);
+    win.hide();
   });
 
   return deferred.promise;

@@ -22,8 +22,8 @@ controller.open = function (req, res) {
       }
 
       return chooseDefault(ext)
-        .then(function (app) {
-          openWithApp(req.body.path, app);
+        .then(function (options) {
+          openWithApp(req.body.path, options.app);
         });
     });
 
