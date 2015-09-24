@@ -30,5 +30,5 @@ module.exports = {
   client: {
     getFolders: getFolders
   },
-  manifests: ['./package.json']
+  manifests: ['./package.json', './bower.json']
 };
