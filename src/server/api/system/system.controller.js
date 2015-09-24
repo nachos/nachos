@@ -23,8 +23,16 @@ controller.open = function (req, res) {
 
       return chooseDefault(ext)
         .then(function (options) {
+          if (options.always) {
+            defaults.setDefaultApp(ext, options.app);
+          }
+
           openWithApp(req.body.path, options.app);
         });
+    })
+    .catch(function (err) {
+      // TODO: LOG THIS
+      console.log(err);
     });
 
   res.end();

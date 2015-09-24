@@ -1,19 +1,11 @@
 'use strict';
 
-var del = require('del');
-var path = require('path');
-var config = require('../config');
+var rimraf = require('rimraf');
 
 module.exports = function (gulp) {
+  gulp.task('clean', ['clean:tmp']);
+
   gulp.task('clean:tmp', function (cb) {
-    var rootDir = 'client';
-
-    var folders = config.client.getFolders(rootDir);
-
-    folders.forEach(function (folder) {
-      return del([path.join(rootDir, folder, '.tmp')]);
-    });
-
-    return cb();
+    rimraf('client/*/.tmp', cb);
   });
 };

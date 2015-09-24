@@ -6,9 +6,7 @@ module.exports = function (gulp) {
   gulp.task('serve', function (cb) {
     runSequence(
       'lint',
-      'inject:js',
-      'less',
-      'wiredep',
+      'build',
       'livereload',
       [
         'electron',

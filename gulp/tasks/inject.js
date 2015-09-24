@@ -2,6 +2,7 @@
 
 var inject = require('gulp-inject');
 var path = require('path');
+var es = require('event-stream');
 
 var config = require('../config');
 
@@ -9,11 +10,9 @@ module.exports = function (gulp) {
   gulp.task('inject', ['inject:js', 'inject:less']);
 
   gulp.task('inject:less', function () {
-    var rootDir = 'client';
+    var folders = config.paths.client.windows;
 
-    var folders = config.client.getFolders(rootDir);
-
-    return folders.forEach(function (folder) {
+    var streams = folders.map(function (folder) {
       return gulp.src('client/' + folder + '/**/app.less')
         .pipe(inject(gulp.src([
           'client/' + folder + '/app/**/*.less',
@@ -27,16 +26,16 @@ module.exports = function (gulp) {
           starttag: '// injector',
           endtag: '// endinjector'
         }))
-        .pipe(gulp.dest(path.join(rootDir, folder)));
+        .pipe(gulp.dest(path.join('client', folder)));
     });
+
+    return es.merge(streams);
   });
 
   gulp.task('inject:js', function () {
-    var rootDir = 'client';
+    var folders = config.paths.client.windows;
 
-    var folders = config.client.getFolders(rootDir);
-
-    return folders.forEach(function (folder) {
+    var streams = folders.map(function (folder) {
       return gulp.src('client/' + folder + '/**/index.html')
         .pipe(inject(gulp.src([
           'client/' + folder + '/{app,components}/**/*.js',
@@ -52,7 +51,9 @@ module.exports = function (gulp) {
           starttag: '<!-- injector:js -->',
           endtag: '<!-- endinjector -->'
         }))
-        .pipe(gulp.dest(path.join(rootDir, folder)));
+        .pipe(gulp.dest(path.join('client', folder)));
     });
+
+    return es.merge(streams);
   });
 };
