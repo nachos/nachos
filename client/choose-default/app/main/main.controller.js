@@ -6,19 +6,20 @@ angular.module('chooseDefaultWindow')
     var fileAssociation = require('file-association');
 
     ipc.on('chooseDefault:extension', function (ext) {
-      fileAssociation.getAppsThatCanOpenExtension(ext, function (err, apps) {
-        $mdDialog.show({
-          controller: 'chooseDefault',
-          templateUrl: 'app/dialog/dialog.html',
-          clickOutsideToClose: false,
-          hasBackdrop: false,
-          locals: {
-            apps: apps
-          }
-        })
-          .then(function (app) {
-            ipc.send('chooseDefault:selected', app);
+      fileAssociation.getAppsThatCanOpenExtension(ext)
+        .then(function (apps) {
+          return $mdDialog.show({
+            controller: 'chooseDefault',
+            templateUrl: 'app/dialog/dialog.html',
+            clickOutsideToClose: false,
+            hasBackdrop: false,
+            locals: {
+              apps: apps
+            }
           });
-      });
+        })
+        .then(function (app) {
+          ipc.send('chooseDefault:selected', app);
+        });
     });
   });
