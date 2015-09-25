@@ -9,7 +9,7 @@ module.exports = function (gulp) {
       'build',
       'livereload',
       [
-        'electron',
+        'electron:run',
         'watch'
       ],
       cb);

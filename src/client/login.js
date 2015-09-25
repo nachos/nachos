@@ -29,7 +29,8 @@ module.exports = function () {
 
   ipc.on('login:success', function (event, token) {
     deferred.resolve(token);
-    win.close();
+
+    win.hide();
   });
 
   return deferred.promise;
