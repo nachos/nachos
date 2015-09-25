@@ -2,20 +2,20 @@
 
 var path = require('path');
 var exec = require('child_process').exec;
-var defaults = require('../../../services/defaults');
+var nachosConfig = require('nachos-config');
+
 var chooseDefault = require('../../../client/choose-default');
 
 var controller = {};
 
 var openWithApp = function (file, app) {
-  app.command = app.command.replace(/\%\w/g, file);
-  exec(app.command);
+  return exec(app.command.replace(/\%\w/g, file));
 };
 
 controller.open = function (req, res) {
   var ext = path.extname(req.body.path);
 
-  defaults.getDefaultApp(ext)
+  nachosConfig.getDefaultApp(ext)
     .then(function (app) {
       if (app) {
         return openWithApp(req.body.path, app);
@@ -24,14 +24,16 @@ controller.open = function (req, res) {
       return chooseDefault(ext)
         .then(function (options) {
           if (options.always) {
-            defaults.setDefaultApp(ext, options.app);
+            nachosConfig.setDefaultApp(ext, options.app)
+              .catch(function (err) {
+                console.log(err);
+              });
           }
 
-          openWithApp(req.body.path, options.app);
+          return openWithApp(req.body.path, options.app);
         });
     })
     .catch(function (err) {
-      // TODO: LOG THIS
       console.log(err);
     });
 

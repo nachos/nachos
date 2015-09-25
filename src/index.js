@@ -10,13 +10,14 @@ server.start();
 app.on('ready', function () {
   auth.isAuthenticated()
     .then(function (isAuthenticated) {
-      if (isAuthenticated) {
-        return nachosOpen('shell');
+      if (!isAuthenticated) {
+        return auth.login();
       }
-
-      return auth.login()
-        .then(function () {
-          return nachosOpen('shell');
-        });
+    })
+    .then(function () {
+      return nachosOpen('shell');
+    })
+    .catch(function (err) {
+      console.log(err);
     });
 });
