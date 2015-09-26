@@ -1,5 +1,6 @@
 'use strict';
 
+var app = require('app');
 var path = require('path');
 var Q = require('q');
 var ipc = require('ipc');
@@ -17,7 +18,7 @@ module.exports = function (ext) {
     }
   });
 
-  win.loadUrl('file://' + path.resolve('./client/choose-default/index.html'));
+  win.loadUrl('file://' + path.join(app.getAppPath(), './client/choose-default/index.html'));
 
   win.webContents.on('did-finish-load', function () {
     win.show();

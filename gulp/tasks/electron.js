@@ -1,8 +1,11 @@
 'use strict';
 
-var runElectron = require('gulp-run-electron');
 var packager = require('electron-packager');
 var path = require('path');
+var Q = require('q');
+var es = require('event-stream');
+var runElectron = require('gulp-run-electron');
+var jeditor = require('gulp-json-editor');
 
 var config = require('../config');
 
@@ -12,23 +15,37 @@ module.exports = function (gulp) {
       .pipe(runElectron());
   });
 
-  gulp.task('electron:build', ['build'], function (cb) {
+  gulp.task('electron:build', function () {
     var dir = process.cwd();
     var nachosJson = require(path.join(dir, 'nachos.json'));
 
     var opts = {
-      dir: dir,
+      dir: path.join(dir, '.tmp'),
       name: nachosJson.name,
-      platform: 'all',
-      arch: 'all',
+      all: true,
       version: '0.33.1',
+      overwrite: true,
       out: 'dist',
-      ignore: ['/node_modules($|/)', '/dist($|/)']
+      icon: path.join(dir, 'favicon.ico')
     };
 
-    packager(opts, function (err, appPath) {
-      console.log(err || appPath);
-      cb();
-    });
+    return Q.nfcall(packager, opts)
+      .then(function (apps) {
+        var streams = apps.map(function (app) {
+          var cwd = path.join(dir, app, 'resources', 'app');
+
+          var main = './' + nachosJson.name;
+
+          main += app.indexOf('win32') !== -1 ? '.exe' : '';
+
+          return gulp.src(path.join(cwd, 'nachos.json'))
+            .pipe(jeditor({
+              main: main
+            }))
+            .pipe(gulp.dest(path.join(dir, app)));
+        });
+
+        return es.merge(streams);
+      });
   });
 };
