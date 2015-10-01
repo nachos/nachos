@@ -1,28 +1,7 @@
 'use strict';
 
-function onConnect() {
-}
-
-function onDisconnect() {
-}
-
 module.exports = function (socketio) {
   socketio.on('connection', function (socket) {
-    socket.address = socket.handshake.address !== null ?
-    socket.handshake.address.address + ':' + socket.handshake.address.port : process.env.DOMAIN;
-
-    socket.connectedAt = new Date();
-
-    // Call onDisconnect.
-    socket.on('disconnect', function () {
-      onDisconnect(socket);
-      console.info('[%s] DISCONNECTED', socket.address);
-    });
-
-    // Call onConnect.
-    onConnect(socket);
-    console.info('[%s] CONNECTED', socket.address);
-
     socket.on('settings.global-changed', function (data) {
       socket.broadcast.emit('settings.global-changed:' + data.app, data.config);
     });

@@ -10,9 +10,13 @@ module.exports = function () {
   var deferred = Q.defer();
 
   var win = new BrowserWindow({
+    title: 'Login screen',
     fullscreen: true,
     frame: false,
     type: 'desktop',
+    'always-on-top': true,
+    kiosk: true,
+    'skip-taskbar': true,
     'web-preferences': {
       'web-security': false
     }

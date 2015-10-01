@@ -17,7 +17,7 @@ module.exports = {
     gulp: ['./gulpfile.js', './gulp/**/*.js'],
     coverage: 'coverage/**/lcov.info',
     electron: '.',
-    copy: ['package.json', 'nachos.json', 'README.md', 'LICENSE', './src/**/*', './client/**/*']
+    copy: ['package.json', 'nachos.json', 'README.md', 'LICENSE', './src/**/*', '!./src/**/*.spec.js', './client/**/*', '!./client/**/*.spec.js']
   },
-  manifests: ['./package.json', './bower.json']
+  manifests: ['./package.json', './bower.json', './nachos.json']
 };

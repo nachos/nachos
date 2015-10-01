@@ -1,9 +1,14 @@
 'use strict';
 
-var login = require('../client/login');
 var nachosConfig = require('nachos-config');
 var debug = require('debug')('nachos:auth');
+var login = require('../client/login');
 
+/**
+ * Checks if the user already logged in
+ *
+ * @returns {Q.promise} Boolean of the user login status
+ */
 var isAuthenticated = function () {
   return nachosConfig.get()
     .then(function (config) {
@@ -11,6 +16,11 @@ var isAuthenticated = function () {
     });
 };
 
+/**
+ * Prompts login window
+ *
+ * @returns {Q.promise} Promise of the saved token after login
+ */
 var promptLogin = function () {
   return login()
     .then(function (token) {

@@ -2,7 +2,6 @@
 
 var packager = require('electron-packager');
 var path = require('path');
-var Q = require('q');
 var es = require('event-stream');
 var runElectron = require('gulp-run-electron');
 var jeditor = require('gulp-json-editor');
@@ -15,7 +14,7 @@ module.exports = function (gulp) {
       .pipe(runElectron());
   });
 
-  gulp.task('electron:build', function () {
+  gulp.task('electron:build', function (cb) {
     var dir = process.cwd();
     var nachosJson = require(path.join(dir, 'nachos.json'));
 
@@ -26,26 +25,35 @@ module.exports = function (gulp) {
       version: '0.33.1',
       overwrite: true,
       out: 'dist',
-      icon: path.join(dir, 'favicon.ico')
+      icon: path.join(dir, 'favicon.ico'),
+      'version-string': {
+        CompanyName: 'Nachos',
+        LegalCopyright: 'GNUGPLv2',
+        FileDescription: nachosJson.name,
+        OriginalFilename: nachosJson.name,
+        FileVersion: nachosJson.version,
+        ProductVersion: nachosJson.version,
+        ProductName: nachosJson.name,
+        InternalName: nachosJson.name
+      }
     };
 
-    return Q.nfcall(packager, opts)
-      .then(function (apps) {
-        var streams = apps.map(function (app) {
-          var cwd = path.join(dir, app, 'resources', 'app');
+    packager(opts, function (err, apps) {
+      if (err) {
+        return cb(err);
+      }
 
-          var main = './' + nachosJson.name;
+      var streams = apps.map(function (app) {
+        var main = './' + nachosJson.name + (app.indexOf('win32') !== -1 ? '.exe' : '');
 
-          main += app.indexOf('win32') !== -1 ? '.exe' : '';
-
-          return gulp.src(path.join(cwd, 'nachos.json'))
-            .pipe(jeditor({
-              main: main
-            }))
-            .pipe(gulp.dest(path.join(dir, app)));
-        });
-
-        return es.merge(streams);
+        return gulp.src(path.join(dir, app, 'resources', 'app', 'nachos.json'))
+          .pipe(jeditor({
+            main: main
+          }))
+          .pipe(gulp.dest(path.join(dir, app)));
       });
+
+      es.merge(streams).on('end', cb);
+    });
   });
 };

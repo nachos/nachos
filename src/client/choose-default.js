@@ -10,8 +10,11 @@ module.exports = function (ext) {
   var deferred = Q.defer();
 
   var win = new BrowserWindow({
+    title: 'Choose default application for ' + ext,
     transparent: true,
     frame: false,
+    'skip-taskbar': true,
+    'always-on-top': true,
     'use-content-size': true,
     'web-preferences': {
       'web-security': false
