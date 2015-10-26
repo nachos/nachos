@@ -22,7 +22,9 @@ var isAuthenticated = function () {
  * @returns {Q.promise} Promise of the saved token after login
  */
 var promptLogin = function () {
-  return login()
+  login.open();
+
+  return login.getToken()
     .then(function (token) {
       debug('got token %s from login', token);
 
